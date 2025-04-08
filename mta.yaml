@@ -1,0 +1,48 @@
+_schema-version: 3.3.0
+ID: capm-pg-demo
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+
+modules:
+  - name: capm-pg-demo-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      instances: 1
+      memory: 256M
+      disk-quota: 512M
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: postgres-dev
+      - name: capm-pg-demo-auth
+
+resources:
+  - name: postgres-dev
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: postgres-dev
+
+  - name: capm-pg-demo-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: capm-pg-demo-${org}-${space}
+        tenant-mode: dedicated
