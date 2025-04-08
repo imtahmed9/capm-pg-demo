@@ -1,7 +1,10 @@
-namespace demo;
+namespace my.machine;
 
-entity Books {
-    key ID  : Integer;
-    title   : String;
-    stock   : String;
+entity Machine_Data_BTP {
+  key id          : UUID;
+      _NAME       : String;
+      _NUMERICID  : Integer;
+      _VALUE      : Decimal(15, 4);
+      _TIMESTAMP  : Timestamp;
+      _QUALITY    : Integer;
 }

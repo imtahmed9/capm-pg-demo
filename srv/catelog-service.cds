@@ -1,5 +1,5 @@
-using { demo as my } from '../db/data-model';
+using { my.machine as machine } from '../db/data-model';
 
 service CatelogService {
-    entity Books as projection on my.Books;
+  entity MachineData as projection on machine.Machine_Data_BTP;
 }

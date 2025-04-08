@@ -20,11 +20,27 @@
   "scripts": {
     "start": "cds-serve"
   },
-  "cds": {
-    "requires": {
-      "auth": {
-        "kind": "xsuaa"
+ "cds": {
+  "requires": {
+    "db": {
+      "kind": "postgres",
+      "pool": {
+        "acquireTimeoutMillis": 15000
+      },
+      "credentials": {
+        "host": "postgres-4bc292b5-df79-40a7-8c17-03a5320d356e.cqryblsdrbcs.us-east-1.rds.amazonaws.com",
+        "port": 1934,
+        "database": "cJrXwFkTdpfx",
+        "user": "74aad7441c40",
+        "password": "99d5c46cf00ea923493b8f52406f088",
+        "ssl": {
+          "rejectUnauthorized": true
+        }
       }
     }
   }
+}
+
+
+
 }
